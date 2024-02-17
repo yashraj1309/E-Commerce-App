@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 export default function Rating(props: { rating: number; stock: number }) {
   return (
