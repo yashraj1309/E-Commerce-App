@@ -10,17 +10,17 @@ const initialState: StateType = {
   value: []
 };
 
-export const productSlice = createSlice({
-  name: "addProductList", //for dev tools
+export const cartSlice = createSlice({
+  name: "CART", //for dev tools
   initialState,
   reducers: {
-    addProductList: (state, action) => {
-      state.value = [...action.payload];
+    addToCart: (state, action) => {
+      state.value = [...state.value,action.payload];
     }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addProductList } = productSlice.actions;
+export const { addToCart} = cartSlice.actions;
 
-export default productSlice.reducer;
+export default cartSlice.reducer;

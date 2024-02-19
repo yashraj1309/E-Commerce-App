@@ -7,11 +7,13 @@ import "./productSub.css";
 import Spinner from "react-bootstrap/Spinner";
 import Price from "@/components/atoms/Price";
 import Rating from "@/components/atoms/Rating";
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/redux/CartSlice";
 
 export default function ProductSubCard({ params }: { params: { id: string } }) {
+  const dispatch = useDispatch();
   //setting the current product
   const [product, setProduct] = useState<Product | null>(null);
-
   //getting the product from its id;
   useEffect(() => {
     //
@@ -49,6 +51,10 @@ export default function ProductSubCard({ params }: { params: { id: string } }) {
     );
   }
 
+  // dispatch : add product to cart
+  const addToCartHandler = () => {
+    dispatch(addToCart(product));
+  };
   return (
     <div style={{ marginTop: "5rem" }}>
       <div className="sub-product-main">
@@ -96,6 +102,7 @@ export default function ProductSubCard({ params }: { params: { id: string } }) {
             type="button"
             className="btn btn-primary custom-btn-product"
             style={{ marginRight: "8px" }}
+            onClick={addToCartHandler}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

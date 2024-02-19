@@ -2,9 +2,20 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { RootState } from "@/redux/store";
+import { useSelector } from "react-redux";
 
 function NavbarMain() {
+  const cart = useSelector((state: RootState) => state.addToCart.value); //This is reducer name
+  const [cartSize, setCartSize] = useState(0);
+  
+  useEffect(()=> {
+    if(cart) {
+      setCartSize((prev)=>cart.length);
+    }
+  },[cart]);
   return (
     <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
       <Container>
@@ -17,8 +28,8 @@ function NavbarMain() {
         <div className="d-flex justify-content-end">
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto align-items-center">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#link">Cart</Nav.Link>
+              <Nav.Link href="/">Home</Nav.Link>
+              <Nav.Link href="/">Cart&nbsp;{cartSize}</Nav.Link>
               <Nav.Link href="#profile">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
