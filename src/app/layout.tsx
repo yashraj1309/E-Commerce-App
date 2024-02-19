@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./globals.css";
+import { StoreProvider } from "@/redux/StoreProvider";
 
 import NavbarMain from "@/components/Navbar";
 
@@ -15,11 +16,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <NavbarMain />
-        {children}
-      </body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body>
+          <NavbarMain />
+          {children}
+        </body>
+      </html>
+    </StoreProvider>
   );
 }

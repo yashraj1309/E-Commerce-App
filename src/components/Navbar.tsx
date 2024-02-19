@@ -2,13 +2,17 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import Link from "next/link";
 
 function NavbarMain() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
       <Container>
-        <Navbar.Brand href="#home"><b>AMAZONA</b></Navbar.Brand>
+        <Link href="/" className="link">
+          <Navbar.Brand>
+            <b>AMAZONA</b>
+          </Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <div className="d-flex justify-content-end">
           <Navbar.Collapse id="basic-navbar-nav">

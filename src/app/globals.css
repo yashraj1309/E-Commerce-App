@@ -1,3 +1,23 @@
-/* div {
-  color: gainsboro
-} */
+.link {
+  text-decoration: none;
+  color: black;
+}
+.product-card-main {
+  transition: 0.2s;
+}
+
+.product-card-main:hover {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.title-link {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.title-link:hover {
+  color: #87878769;
+}
+

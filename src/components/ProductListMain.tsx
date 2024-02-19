@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import { fetchProducts } from "@/app/api";
 import { useState, useEffect } from "react";
 import { Product } from "@/types/ProductType";
 import Spinner from "react-bootstrap/Spinner";
 import ProductCard from "./ProductCard";
 import Pagination from "react-bootstrap/Pagination";
+import axios from "axios";
 
 export default function ProductListMain() {
   const CARDS_VISIBLE_PER_PAGE = 12;
@@ -17,16 +17,20 @@ export default function ProductListMain() {
   const [paginationButtons, setPaginationButtons] = useState(0);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const productsData = await fetchProducts();
-      setProducts(productsData);
-      setVisibleProducts(productsData.slice(0, CARDS_VISIBLE_PER_PAGE));
+    const getProductList = async () => {
+      const response = await axios.get(
+        "https://dummyjson.com/products?limit=0"
+      );
+      setProducts(response.data.products);
+      setVisibleProducts(
+        response.data.products.slice(0, CARDS_VISIBLE_PER_PAGE)
+      );
       const totalPages = Math.ceil(
-        productsData.length / CARDS_VISIBLE_PER_PAGE
+        response.data.products.length / CARDS_VISIBLE_PER_PAGE
       );
       setPaginationButtons(totalPages);
     };
-    fetchData();
+    getProductList();
   }, []);
 
   useEffect(() => {}, [visibleProducts]);
@@ -44,9 +48,14 @@ export default function ProductListMain() {
   return (
     <div className="p-5" style={{ marginTop: "1.5rem" }}>
       {visibleProducts.length === 0 ? (
-        <Spinner animation="border" role="status" size="sm">
+        <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <Spinner
+          animation="border"
+          role="status"
+        >
           <span className="visually-hidden">Loading...</span>
         </Spinner>
+        </div>
       ) : (
         <>
           <div

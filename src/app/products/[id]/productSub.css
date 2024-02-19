@@ -1,0 +1,23 @@
+.sub-product-main {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  height: auto;
+  padding: 3rem 8rem;
+  background: #fff;
+  position: relative;
+}
+
+.sticky-card {
+  position: fixed;
+  width: 400px;
+  z-index: 20;
+  right: 8rem;
+}
+
+.custom-btn-product {
+  height: 30px;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+}

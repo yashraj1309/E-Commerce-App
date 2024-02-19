@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-
+import addProductList from "./ProductList";
 
 export const store = configureStore({
   reducer: {
+    addProductList: addProductList,
   },
 });
 
