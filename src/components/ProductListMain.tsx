@@ -22,15 +22,32 @@ export default function ProductListMain() {
         "https://dummyjson.com/products?limit=0"
       );
       setProducts(response.data.products);
-      setVisibleProducts(
-        response.data.products.slice(0, CARDS_VISIBLE_PER_PAGE)
-      );
+        localStorage.setItem(
+          "products",
+          JSON.stringify(response.data.products)
+        );
+      setVisibleProducts(response.data.products.slice(0, CARDS_VISIBLE_PER_PAGE));
       const totalPages = Math.ceil(
         response.data.products.length / CARDS_VISIBLE_PER_PAGE
       );
       setPaginationButtons(totalPages);
     };
-    getProductList();
+
+    const storedProducts = localStorage.getItem("products");
+
+    if (!storedProducts) {
+      // If products are not stored
+      getProductList();
+    } else {
+      setProducts(JSON.parse(storedProducts));
+      setVisibleProducts(
+        JSON.parse(storedProducts).slice(0, CARDS_VISIBLE_PER_PAGE)
+      );
+      const totalPages = Math.ceil(
+        JSON.parse(storedProducts).length / CARDS_VISIBLE_PER_PAGE
+      );
+      setPaginationButtons(totalPages);
+    }
   }, []);
 
   useEffect(() => {}, [visibleProducts]);
@@ -68,7 +85,7 @@ export default function ProductListMain() {
             }}
           >
             {visibleProducts.map((product) => (
-              <ProductCard product={product} />
+              <ProductCard product={product} key={product.id}/>
             ))}
           </div>
           <Pagination className="justify-content-center mt-4">

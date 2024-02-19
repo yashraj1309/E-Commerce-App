@@ -6,7 +6,7 @@ import Rating from "./atoms/Rating";
 import { Product } from "@/types/ProductType";
 import Price from "./atoms/Price";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function CartProduct({ product }: { product: Product }) {
   return (
     <Card
       style={{ width: "16rem" }}

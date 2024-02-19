@@ -27,10 +27,14 @@ function NavbarMain() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <div className="d-flex justify-content-end">
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto align-items-center">
-              <Nav.Link href="/">Home</Nav.Link>
-              <Nav.Link href="/">Cart&nbsp;{cartSize}</Nav.Link>
-              <Nav.Link href="#profile">
+            <Nav className="me-auto align-items-center" style={{ gap: "1rem" }}>
+              <Link href="/" className="link nav-link-text">
+                Home
+              </Link>
+              <Link href="/cart" className="link nav-link-text">
+                Cart&nbsp;{cartSize}
+              </Link>
+              <Link href="#profile" className="link nav-link-text">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -45,7 +49,7 @@ function NavbarMain() {
                     d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
                   />
                 </svg>
-              </Nav.Link>
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </div>

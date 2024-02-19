@@ -21,3 +21,12 @@
   color: #87878769;
 }
 
+.nav-link-text {
+  color: gray;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.nav-link-text:hover {
+  color: black;
+}

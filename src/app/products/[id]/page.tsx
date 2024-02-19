@@ -9,6 +9,7 @@ import Price from "@/components/atoms/Price";
 import Rating from "@/components/atoms/Rating";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/redux/CartSlice";
+import Image from "next/image";
 
 export default function ProductSubCard({ params }: { params: { id: string } }) {
   const dispatch = useDispatch();
@@ -56,12 +57,12 @@ export default function ProductSubCard({ params }: { params: { id: string } }) {
     dispatch(addToCart(product));
   };
   return (
-    <div style={{ marginTop: "5rem" }}>
+    <div style={{ marginTop: "5rem" }} key={product.id}>
       <div className="sub-product-main">
         <div className="sub-product-main-container">
           {product.images.map((item) => {
             return (
-              <img
+              <Image
                 src={item}
                 alt={product.title}
                 style={{
@@ -73,7 +74,10 @@ export default function ProductSubCard({ params }: { params: { id: string } }) {
                   marginBottom: ".5rem",
                   paddingBottom: ".5rem",
                 }}
-              ></img>
+                width={1000}
+                height={2500}
+                key={item}
+              />
             );
           })}
         </div>
