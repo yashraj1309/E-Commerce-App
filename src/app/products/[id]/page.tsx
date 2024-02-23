@@ -15,6 +15,7 @@ export default function ProductSubCard({ params }: { params: { id: string } }) {
   const dispatch = useDispatch();
   //setting the current product
   const [product, setProduct] = useState<Product | null>(null);
+  const [quantity, setQuantity] = useState<number>(0);
   //getting the product from its id;
   useEffect(() => {
     //
@@ -54,7 +55,8 @@ export default function ProductSubCard({ params }: { params: { id: string } }) {
 
   // dispatch : add product to cart
   const addToCartHandler = () => {
-    dispatch(addToCart(product));
+    setQuantity((prev)=>prev+1);
+    dispatch(addToCart({...product,quantity: 1}));
   };
   return (
     <div style={{ marginTop: "5rem" }} key={product.id}>

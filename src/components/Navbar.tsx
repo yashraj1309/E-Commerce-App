@@ -6,6 +6,16 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
+import { Product } from "@/types/ProductType";
+
+// Function to calculate total quantity of products
+function calculateTotalQuantity(products: Product[]): number {
+  let totalQuantity = 0;
+  for (const product of products) {
+    totalQuantity += product.quantity;
+  }
+  return totalQuantity;
+}
 
 function NavbarMain() {
   const cart = useSelector((state: RootState) => state.addToCart.value); //This is reducer name
@@ -13,7 +23,7 @@ function NavbarMain() {
   
   useEffect(()=> {
     if(cart) {
-      setCartSize((prev)=>cart.length);
+      setCartSize((prev)=>calculateTotalQuantity(cart));
     }
   },[cart]);
   return (

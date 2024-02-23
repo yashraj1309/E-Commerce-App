@@ -9,7 +9,7 @@ import Price from "./atoms/Price";
 export default function CartProduct({ product }: { product: Product }) {
   return (
     <Card
-      style={{ width: "16rem" }}
+      style={{ width: "40rem", flexDirection: "row" }}
       className="product-card-main"
       key={product.id}
     >
@@ -18,12 +18,9 @@ export default function CartProduct({ product }: { product: Product }) {
           variant="top"
           src={product.thumbnail}
           style={{
-            width: "100%",
-            height: "auto",
+            width: "300px",
+            height: "200px",
             objectFit: "cover",
-            maxHeight: "190px",
-            minHeight: "190px",
-            borderBottom: "1px solid gainsboro",
           }}
         />
       </Link>
