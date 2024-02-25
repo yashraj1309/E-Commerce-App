@@ -15,7 +15,6 @@ export default function ProductSubCard({ params }: { params: { id: string } }) {
   const dispatch = useDispatch();
   //setting the current product
   const [product, setProduct] = useState<Product | null>(null);
-  const [quantity, setQuantity] = useState<number>(0);
   //getting the product from its id;
   useEffect(() => {
     //
@@ -55,7 +54,6 @@ export default function ProductSubCard({ params }: { params: { id: string } }) {
 
   // dispatch : add product to cart
   const addToCartHandler = () => {
-    setQuantity((prev)=>prev+1);
     dispatch(addToCart({...product,quantity: 1}));
   };
   return (
@@ -134,7 +132,7 @@ export default function ProductSubCard({ params }: { params: { id: string } }) {
             >
               <path d="M5.52.359A.5.5 0 0 1 6 0h4a.5.5 0 0 1 .474.658L8.694 6H12.5a.5.5 0 0 1 .395.807l-7 9a.5.5 0 0 1-.873-.454L6.823 9.5H3.5a.5.5 0 0 1-.48-.641z" />
             </svg>
-            <span> BUY NOW</span>
+            <span>BUY NOW</span>
           </button>
         </div>
       </div>

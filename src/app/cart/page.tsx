@@ -4,6 +4,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { Product } from "@/types/ProductType";
 import CartProduct from "@/components/CartProduct";
+import Image from "next/image";
+import PriceDetails from "@/components/PriceDetails";
+import "./cart.css";
 
 export default function Cart() {
   const [cart, setCart] = useState<Product[]>([]);
@@ -16,17 +19,30 @@ export default function Cart() {
   return (
     <div
       style={{
-        margin: "5rem",
-        display: "flex",
-        flexWrap: "wrap",
-        gap: "1rem",
-        justifyContent: "center",
-        alignItems: "center",
+        margin: "5rem"
       }}
     >
-      {cart.map((item) => {
-        return <CartProduct product={item} key={item.id} />;
-      })}
+      {cart.length === 0 ? (
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+        <Image
+          src={"https://www.eventsqed.com/Images/empty-cart-icon-min.png"}
+          alt="Cart is empty"
+          height={200}
+          width={200}
+        />
+        </div>
+      ) : (
+        <div className="cart-container">
+          <div style={{display: 'flex', alignItems: 'center', gap: "1rem", flexDirection: 'column'}}>
+            {cart.map((item) => {
+              return <CartProduct product={item} key={item.id} />;
+            })}
+          </div>
+          <div className="price-details">
+          <PriceDetails />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
