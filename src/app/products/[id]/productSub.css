@@ -1,20 +1,22 @@
 .sub-product-main {
-  display: flex;
-  gap: 1rem;
-  width: 100%;
-  height: auto;
-  padding: 3rem 8rem;
-  background: #fff;
+  display: grid;
+  grid-template-columns: 56% 44%;
+  grid-gap: 1rem;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 4px;
+}
+
+.sticky-product-detail {
   position: relative;
+  border-left: 1px solid rgba(0, 0, 0, 0.2);
+  padding-left: 2rem;
 }
-
-.sticky-card {
-  position: fixed;
-  width: 400px;
-  z-index: 20;
-  right: 8rem;
+.sticky-detail-child {
+  position: sticky;
+  left: 5%;
+  top: 10%;
 }
-
 .custom-btn-product {
   height: 30px;
   font-size: 14px;

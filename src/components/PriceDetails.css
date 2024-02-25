@@ -2,4 +2,16 @@
   position: sticky;
   top: 10%;
   left: 5%;
+  width: 90%;
+  padding: 0.5rem;
+}
+.price-details-child > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.cart-text-success {
+    color: #388e3c;
 }

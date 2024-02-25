@@ -20,14 +20,23 @@ function calculateTotalQuantity(products: Product[]): number {
 function NavbarMain() {
   const cart = useSelector((state: RootState) => state.addToCart.value); //This is reducer name
   const [cartSize, setCartSize] = useState(0);
-  
-  useEffect(()=> {
-    if(cart) {
-      setCartSize((prev)=>calculateTotalQuantity(cart));
+
+  useEffect(() => {
+    if (cart) {
+      setCartSize((prev) => calculateTotalQuantity(cart));
     }
-  },[cart]);
+  }, [cart]);
   return (
-    <Navbar expand="lg" className="bg-body-tertiary" fixed="top">
+    <Navbar
+      expand="lg"
+      fixed="top"
+      style={{
+        paddingLeft: "10rem",
+        backgroundColor: "white",
+        paddingRight: "10rem",
+        height: '50px'
+      }}
+    >
       <Container>
         <Link href="/" className="link">
           <Navbar.Brand>
@@ -47,11 +56,12 @@ function NavbarMain() {
               <Link href="#profile" className="link nav-link-text">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
+                  width="22"
+                  height="22"
                   fill="currentColor"
                   className="bi bi-person-circle"
                   viewBox="0 0 16 16"
+                  style={{ marginBottom: "2px" }}
                 >
                   <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
                   <path

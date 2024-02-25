@@ -1,3 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: #f5f5f5;
+}
 .link {
   text-decoration: none;
   color: black;
@@ -22,11 +29,13 @@
 }
 
 .nav-link-text {
-  color: gray;
-  font-size: 16px;
-  transition: 0.2s;
+  color: black;
+  font-size: 18px;
+}
+.nav-link-text:hover {
+  border-bottom: 1px solid black;
 }
 
-.nav-link-text:hover {
-  color: black;
+.nav-link-text:last-child:hover {
+  border: none;
 }

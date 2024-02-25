@@ -22,11 +22,10 @@ export default function ProductListMain() {
         "https://dummyjson.com/products?limit=0"
       );
       setProducts(response.data.products);
-        localStorage.setItem(
-          "products",
-          JSON.stringify(response.data.products)
-        );
-      setVisibleProducts(response.data.products.slice(0, CARDS_VISIBLE_PER_PAGE));
+      localStorage.setItem("products", JSON.stringify(response.data.products));
+      setVisibleProducts(
+        response.data.products.slice(0, CARDS_VISIBLE_PER_PAGE)
+      );
       const totalPages = Math.ceil(
         response.data.products.length / CARDS_VISIBLE_PER_PAGE
       );
@@ -63,15 +62,27 @@ export default function ProductListMain() {
     setCurrentPage((prev) => x);
   };
   return (
-    <div className="p-5" style={{ marginTop: "1.5rem" }}>
+    <div
+      className="p-4"
+      style={{
+        backgroundColor: "white",
+        margin: "4.5rem 1rem 3rem 1rem",
+        borderRadius: "4px",
+      }}
+    >
       {visibleProducts.length === 0 ? (
-        <div style={{width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <Spinner
-          animation="border"
-          role="status"
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+          <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
         </div>
       ) : (
         <>
@@ -80,12 +91,12 @@ export default function ProductListMain() {
               display: "flex",
               alignContent: "center",
               justifyContent: "space-between",
-              gap: "1rem",
+              gap: "1.8rem",
               flexWrap: "wrap",
             }}
           >
             {visibleProducts.map((product) => (
-              <ProductCard product={product} key={product.id}/>
+              <ProductCard product={product} key={product.id} />
             ))}
           </div>
           <Pagination className="justify-content-center mt-4">

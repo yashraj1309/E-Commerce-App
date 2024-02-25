@@ -2,8 +2,11 @@
   display: grid;
   grid-template-columns: 60% 40%;
   grid-gap: 1rem;
+  background-color: white;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .price-details {
-    position: relative;
+  position: relative;
 }
