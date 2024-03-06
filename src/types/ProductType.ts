@@ -12,3 +12,8 @@ export interface Product {
   images: string[];
   quantity: number;
 }
+
+export interface User {
+  email: string;
+  password: string;
+}
