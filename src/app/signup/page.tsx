@@ -5,6 +5,8 @@ import Form from "react-bootstrap/Form";
 import { useState, useEffect } from "react";
 import { addUser } from "@/redux/UserSlice";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import "./signup.css";
 
 function validateEmail(email: string) {
   // Regular expression for validating email
@@ -12,8 +14,10 @@ function validateEmail(email: string) {
   return emailRegex.test(email);
 }
 
+const initialUserValue = { email: "", password: "" };
+
 export default function SignUp() {
-  const [userData, setUserData] = useState({ email: "", password: "" });
+  const [userData, setUserData] = useState(initialUserValue);
   const [errors, setErrors] = useState({
     emailError: false,
     passwordError: false,
@@ -59,10 +63,13 @@ export default function SignUp() {
   }, [userData]);
 
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const onSubmitHandler = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(addUser(userData));
+    setUserData((user) => initialUserValue);
+    router.push("/");
   };
 
   return (
@@ -72,6 +79,7 @@ export default function SignUp() {
         margin: "100px auto",
         backgroundColor: "white",
         padding: "16px",
+        borderRadius: "4px",
       }}
     >
       <Form onSubmit={onSubmitHandler}>
@@ -82,8 +90,11 @@ export default function SignUp() {
             name="email"
             placeholder="name@example.com"
             onChange={inputHandler}
+            value={userData.email}
           />
-          <div>{errors.emailError && "Please enter valid email..."}</div>
+          {errors.emailError && (
+            <div className="formError">Please enter valid email...</div>
+          )}
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label htmlFor="inputPassword5">Password</Form.Label>
@@ -92,11 +103,14 @@ export default function SignUp() {
             name="password"
             aria-describedby="passwordHelpBlock"
             onChange={inputHandler}
+            value={userData.password}
           />
-          <div>
-            {errors.passwordError &&
-              "Password length should be greater than or equal to 8..."}
-          </div>
+
+          {errors.passwordError && (
+            <div className="formError">
+              Password length should be greater than or equal to 8...
+            </div>
+          )}
         </Form.Group>
         <Button
           variant="primary"

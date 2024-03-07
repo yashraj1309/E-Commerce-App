@@ -15,10 +15,14 @@ export const userSlice = createSlice({
       state.email = email;
       state.password = password;
     },
+    logoutUser: (state) => {
+      state.email = "";
+      state.password = "";
+    }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addUser } = userSlice.actions;
+export const { addUser, logoutUser } = userSlice.actions;
 
 export default userSlice.reducer;

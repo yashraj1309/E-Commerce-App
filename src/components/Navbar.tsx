@@ -4,10 +4,12 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import Link from "next/link";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { Product } from "@/types/ProductType";
+import { logoutUser } from "@/redux/UserSlice";
 
 // Function to calculate total quantity of products
 function calculateTotalQuantity(products: Product[]): number {
@@ -23,6 +25,8 @@ function NavbarMain() {
   const user = useSelector((state: RootState) => state.user);
   const [cartSize, setCartSize] = useState(0);
 
+  const dispatch = useDispatch();
+
   // console.log(user);
 
   useEffect(() => {
@@ -30,6 +34,10 @@ function NavbarMain() {
       setCartSize((prev) => calculateTotalQuantity(cart));
     }
   }, [cart]);
+
+  const logoutHandler = () => {
+    dispatch(logoutUser());
+  };
 
   return (
     <Navbar
@@ -62,7 +70,11 @@ function NavbarMain() {
                 <Dropdown.Toggle
                   variant="success"
                   id="dropdown-basic"
-                  style={{ display: "flex", alignItems: "center" }}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "4px 8px",
+                  }}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -79,26 +91,46 @@ function NavbarMain() {
                       d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1"
                     />
                   </svg>
-                  {user.email}
+                  <div style={{ marginBottom: "3px", marginLeft: "5px" }}>
+                    {user.email === "" ? "Login" : "Welcome"}
+                  </div>
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item>
-                    <Link href="/login" className="link">
-                      Login
-                    </Link>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                    <Link href="/signup" className="link">
-                      Sign Up
-                    </Link>
-                  </Dropdown.Item>
-                  <hr style={{ margin: "5px" }}></hr>
-                  <Dropdown.Item href="/user">
-                    <Link href="/user" className="link">
-                      Profile
-                    </Link>
-                  </Dropdown.Item>
+                  {user.email === "" && (
+                    <>
+                      <Dropdown.Item>
+                        <Link href="/login" className="link">
+                          Login
+                        </Link>
+                      </Dropdown.Item>
+                      <hr style={{ margin: "5px 0px" }}></hr>
+                      <Dropdown.Item>
+                        <Link href="/signup" className="link">
+                          Sign Up
+                        </Link>
+                      </Dropdown.Item>
+                    </>
+                  )}
+                  {user.email !== "" && (
+                    <>
+                      <Dropdown.Item href="/user">
+                        <Link href="/user" className="link">
+                          Profile
+                        </Link>
+                      </Dropdown.Item>
+                      <hr style={{ margin: "5px 0px" }}></hr>
+                      <Dropdown.Item>
+                        <Link
+                          href="javascript:void(0)"
+                          className="link"
+                          onClick={logoutHandler}
+                        >
+                          Logout {"->"}
+                        </Link>
+                      </Dropdown.Item>
+                    </>
+                  )}
                 </Dropdown.Menu>
               </Dropdown>
             </Nav>
