@@ -4,6 +4,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import Nav from "react-bootstrap/Nav";
 import Link from "next/link";
 import Navbar from "react-bootstrap/Navbar";
+import SearchForm from "./atoms/SearchForm";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -47,7 +48,7 @@ function NavbarMain() {
         paddingLeft: "10rem",
         backgroundColor: "white",
         paddingRight: "10rem",
-        height: "50px",
+        height: "55px",
       }}
     >
       <Container>
@@ -56,6 +57,7 @@ function NavbarMain() {
             <b>AMAZONA</b>
           </Navbar.Brand>
         </Link>
+        <SearchForm/>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <div className="d-flex justify-content-end">
           <Navbar.Collapse id="basic-navbar-nav">

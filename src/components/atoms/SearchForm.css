@@ -1,0 +1,22 @@
+.search-form {
+  position: relative;
+  margin-left: 16px;
+  margin-right: 16px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.search-form-input:focus {
+  box-shadow: none;
+}
+
+.search-form-search_btn {
+  position: absolute;
+  right: 10px;
+}
+
+.search-form-search_btn:hover {
+  cursor: pointer;
+  fill: #0d6efd;
+}
