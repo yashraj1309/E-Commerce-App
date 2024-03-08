@@ -2,10 +2,10 @@
 import Container from "react-bootstrap/Container";
 import Dropdown from "react-bootstrap/Dropdown";
 import Nav from "react-bootstrap/Nav";
+import Link from "next/link";
 import Navbar from "react-bootstrap/Navbar";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import Link from "next/link";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import { Product } from "@/types/ProductType";
