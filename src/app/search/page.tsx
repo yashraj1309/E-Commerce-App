@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Spinner from "react-bootstrap/Spinner";
 import { Product } from "@/types/ProductType";
@@ -16,16 +16,20 @@ const getProductList = async (query: string) => {
   return response.data.products;
 };
 
-export default function Searched() {
+function SearchBarFallback() {
+  return <>Error on our side please refresh and search again...</>;
+}
+
+function Searched() {
   const searchParams = useSearchParams();
   //   getting search requested by user : q is query param
   //example route : /search?q="iphone"
-  const search = searchParams.get("q");
+
+  const search = searchParams.has("q") ? searchParams.get("q") : "";
   console.log("search: " + search);
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
-  const [noProductFound, setNoProductFount] = useState(false);
 
   useEffect(() => {
     const fetchSearchItems = async (query: string) => {
@@ -34,7 +38,6 @@ export default function Searched() {
         const getProducts = await getProductList(query);
         setLoading(false);
         setProducts(getProducts);
-        getProducts.length === 0 && setNoProductFount(true);
       } catch (error) {
         console.error("Error fetching search items:", error);
       }
@@ -42,6 +45,8 @@ export default function Searched() {
 
     if (search) {
       fetchSearchItems(search);
+    } else {
+      setLoading(false);
     }
   }, [search]);
 
@@ -76,7 +81,7 @@ export default function Searched() {
               style={{
                 display: "flex",
                 alignContent: "center",
-                justifyContent:"flex-start",
+                justifyContent: "flex-start",
                 gap: "1.8rem",
                 flexWrap: "wrap",
               }}
@@ -87,5 +92,13 @@ export default function Searched() {
             </div>
           )}
     </div>
+  );
+}
+
+export default function SearchBarComponent() {
+  return (
+    <Suspense fallback={<SearchBarFallback />}>
+      <Searched />
+    </Suspense>
   );
 }
